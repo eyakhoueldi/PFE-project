@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .sidebar {
+            width: 5rem;
+            height: 100vh;
+            background: #2e1065;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .sidebar:hover {
+            width: 16rem;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 0.75rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item.active {
+            background: rgba(192, 132, 252, 0.2);
+            border-left: 4px solid #c084fc;
+        }
+
+        .icon {
+            font-size: 1.5rem;
+            min-width: 2rem;
+            display: grid;
+            place-items: center;
+        }
+
+        .text {
+            opacity: 0;
+            white-space: nowrap;
+            transition: opacity 0.2s ease;
+        }
+
+        .sidebar:hover .text {
+            opacity: 1;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 2rem);
+            background: #dc2626;
+            color: white;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar:hover .logout {
+            left: 1rem;
+            transform: translateX(0);
+        }
+
+        .sidebar:not(:hover) .logout .text {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+    <aside class="sidebar">
+        <nav class="flex flex-col gap-2 pt-4">
+            <a href="#" class="menu-item active">
+                <span class="icon">🏠</span>
+                <span class="text">Dashboard</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="icon">📋</span>
+                <span class="text">My Tasks</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="icon">📂</span>
+                <span class="text">Projects</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="icon">👥</span>
+                <span class="text">Team</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="icon">📊</span>
+                <span class="text">Reports</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="icon">⚙️</span>
+                <span class="text">Settings</span>
+            </a>
+        </nav>
+
+        <button class="logout">
+            <span class="icon">🚪</span>
+            <span class="text">Logout</span>
+        </button>
+    </aside>
+</body>
+</html>
