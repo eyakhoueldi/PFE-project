@@ -1,0 +1,83 @@
+/* Glassmorphism and custom effects */
+.glass {
+    background: rgba(31, 41, 55, 0.3);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.5);
+}
+
+/* Animated underline for inputs */
+.input-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-bottom: 2px solid #6B7280;
+    background: transparent;
+    color: #E5E7EB;
+    font-size: 1rem;
+    outline: none;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.input-group input:focus {
+    border-bottom-color: #2DD4BF;
+}
+
+.input-group label {
+    position: absolute;
+    top: 0.25rem;
+    left: 1rem;
+    color: #9CA3AF;
+    font-size: 0.875rem;
+    pointer-events: none;
+    transition: all 0.2s ease;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+    top: -1.25rem;
+    font-size: 0.75rem;
+    color: #2DD4BF;
+}
+
+/* Button pulse animation */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+.pulse-button {
+    animation: pulse 2s infinite;
+}
+
+/* 3D button tilt */
+.btn-3d {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-3d:hover {
+    transform: perspective(500px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Adjusted neon text glow - less bright */
+.neon-text {
+    text-shadow: 0 0 3px rgba(45, 212, 191, 0.6), 0 0 6px rgba(45, 212, 191, 0.4), 0 0 10px rgba(45, 212, 191, 0.2);
+    color: #d1d5db; /* Light gray for base text */
+}

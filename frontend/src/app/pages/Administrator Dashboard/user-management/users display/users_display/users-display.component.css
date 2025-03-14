@@ -1,0 +1,214 @@
+/* Glassmorphism and custom effects */
+.glass {
+    background: rgba(31, 41, 55, 0.3);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.5);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Adjusted neon text glow - less bright */
+.neon-text {
+    text-shadow: 0 0 3px rgba(45, 212, 191, 0.6), 0 0 6px rgba(45, 212, 191, 0.4), 0 0 10px rgba(45, 212, 191, 0.2);
+    color: #d1d5db; /* Light gray for base text color to blend with background */
+}
+
+/* Glowing table row on hover */
+.glow-row {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.glow-row:hover {
+    background: rgba(45, 212, 191, 0.1);
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
+}
+
+/* Role chip styling */
+.role-chip {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.role-chip:hover {
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+}
+
+/* Status indicator styling */
+.status-indicator {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    animation: pulse 2s infinite;
+    transition: all 0.3s ease;
+}
+
+.status-indicator:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Pulse animation for status indicator and buttons */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+/* 3D button styling with dynamic tilt */
+.btn-3d {
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: 500;
+    border: none;
+}
+
+/* Hover effect for all btn-3d buttons */
+.btn-3d:hover {
+    transform: perspective(500px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Specific hover overrides for toggle button states */
+.btn-3d.bg-red-500:hover {
+    background-color: #dc2626;
+}
+
+.btn-3d.bg-green-500:hover {
+    background-color: #16a34a;
+}
+
+.btn-3d.bg-blue-500:hover {
+    background-color: #2563eb;
+}
+
+.btn-3d.bg-yellow-500:hover {
+    background-color: #d97706;
+}
+
+/* Pulse animation for buttons */
+.pulse-button {
+    animation: pulse 2s infinite;
+}
+
+/* Table container with fixed height and scrolling */
+.table-container {
+    max-height: 600px; /* Increased to fit larger container */
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: auto; /* Retains horizontal scrolling if needed */
+    position: relative; /* Ensures sticky positioning works */
+}
+
+/* Ensure the table header stays fixed */
+thead tr {
+    position: sticky;
+    top: 0;
+    z-index: 20; /* Increased to ensure it stays above table rows */
+    background: rgba(55, 65, 81, 0.9); /* Solid background to prevent overlap */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
+}
+
+/* Add padding to the table body to avoid overlap with the header */
+tbody {
+    padding-top: 0; /* Adjust if needed */
+}
+
+/* Ensure table rows don’t interfere with the header */
+tbody tr {
+    position: relative;
+    z-index: 10; /* Lower than the header */
+}
+
+/* New styles for enhanced User Details modal */
+.user-details-modal {
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(31, 41, 55, 0.95));
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.user-details-modal:hover {
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+}
+
+/* Profile picture container */
+.profile-pic-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Profile picture styling */
+.profile-pic {
+    transition: transform 0.3s ease;
+}
+
+.profile-pic:hover {
+    transform: scale(1.1);
+}
+
+/* Status dot */
+.status-dot {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 1.25rem; /* Reduced size to match smaller profile picture */
+    height: 1.25rem;
+    border-radius: 9999px;
+    border: 2px solid #111827; /* Matches bg-gray-900 */
+    transition: all 0.3s ease;
+}
+
+.status-dot:hover {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Detail card styling */
+.detail-card {
+    background: rgba(31, 41, 55, 0.5); /* Matches glass effect */
+    border: 1px solid rgba(45, 212, 191, 0.1);
+    border-radius: 0.75rem;
+    padding: 0.75rem; /* Reduced padding for a more compact look */
+    transition: all 0.3s ease;
+}
+
+.detail-card:hover {
+    background: rgba(45, 212, 191, 0.15);
+    border-color: rgba(45, 212, 191, 0.3);
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
+}
+
+/* Detail label */
+.detail-label {
+    color: #2dd4bf; /* Matches neon text base color */
+    font-weight: 600;
+    font-size: 0.85rem; /* Slightly smaller font */
+}
+
+/* Detail value */
+.detail-value {
+    color: #e5e7eb; /* Light gray for contrast */
+    font-size: 0.9rem; /* Slightly smaller font */
+}
+
+/* Modal scale animation */
+.scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}

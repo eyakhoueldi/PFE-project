@@ -1,3 +1,25 @@
+/* src/styles.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --sidebar-width: 5rem;
+}
+
+body {
+  background-color: #111827; /* Match the component background */
+  color: #e5e7eb; /* Match the component text color */
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+* {
+  color: inherit;
+}
+
+app-root {
+  display: block;
+  height: 100%;
+}
