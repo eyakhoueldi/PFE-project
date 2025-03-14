@@ -1,0 +1,74 @@
+/* src/pages/administrator-dashboard/admin-dashboard/admin-dashboard.component.css */
+:host {
+    display: block;
+    min-height: 100vh;
+  }
+  
+  /* Main content container */
+  .main-content {
+    padding-left: var(--sidebar-width);
+    transition: padding-left 0.3s ease;
+    padding: 2rem;
+    color: #e5e7eb; /* Soft white/gray text */
+    background-color: #0a0a0a; /* Blackish background */
+    flex: 1;
+  }
+  
+  /* Heading */
+  h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Activity log card */
+  .activity-card {
+    background-color: #161515; /* Warm dark gray */
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(76, 72, 72, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+  }
+  
+  /* Subheading */
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  /* Table container */
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  /* Table */
+  table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+  }
+  
+  /* Table header */
+  thead tr {
+    background-color: #3f3f3f; /* Medium warm gray */
+    color: #b3b3b3; /* Light warm gray text */
+  }
+  
+  th {
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+  }
+  
+  /* Table body */
+  tbody tr {
+    border-bottom: 1px solid #5c5c5c; /* Mid-tone warm gray border */
+    transition: background-color 0.2s ease;
+  }
+  
+  tbody tr:hover {
+    background-color: #5c5c5c; /* Mid-tone warm gray hover */
+  }
+  
+  td {
+    padding: 0.75rem 1rem;
+  }

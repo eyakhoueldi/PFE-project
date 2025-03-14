@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { FormsModule } from '@angular/forms';
@@ -12,11 +12,10 @@ import { CommonModule } from '@angular/common';
   imports: [FormsModule, CommonModule],
 })
 export class LoginComponent {
-  @Output() onSubmitLoginEvent = new EventEmitter();
-
   email: string = '';
   password: string = '';
   message: string = '';
+  isLoggedIn: boolean = !!localStorage.getItem('token');
 
   private router = inject(Router);
   private loginService = inject(LoginService);
@@ -27,25 +26,68 @@ export class LoginComponent {
       return;
     }
 
-    console.log("Login form submitted");  // Debug log for submission
+    console.log('Login form submitted');
 
     const user = { email: this.email, password: this.password };
-    this.onSubmitLoginEvent.emit(user);
 
     this.loginService.login(user).subscribe({
-      next: (response) => {
-        console.log('Login response:', response); // Debug log for response
-        const token = response.token;
-        localStorage.setItem('token', token);
-        console.log('Login successful, token:', token);
-        this.message = 'Login successful!';
-        this.router.navigate(['/dashboard']);
+      next: (response: any) => {
+        if ('token' in response && 'role' in response) {
+          const token = (response as { token: string }).token;
+          const role = (response as { role: string }).role;
+          localStorage.setItem('token', token);
+          localStorage.setItem('role', role);
+          console.log('Login successful, token:', token, 'role:', role);
+
+          this.isLoggedIn = true;
+
+          switch (role) {
+            case 'ADMINISTRATOR':
+              this.router.navigate(['/admin/dashboard']).then(success => {
+                if (!success) console.error('Navigation to admin dashboard failed');
+              });
+              break;
+            case 'DEV_TEAM_MEMBER':
+              this.router.navigate(['/dev']).then(success => {
+                if (!success) console.error('Navigation to dev failed');
+              });
+              break;
+            case 'PROJECT_MANAGER':
+              this.router.navigate(['/pm']).then(success => {
+                if (!success) console.error('Navigation to pm failed');
+              });
+              break;
+            default:
+              this.router.navigate(['/dashboard']).then(success => {
+                if (!success) console.error('Navigation to dashboard failed');
+              });
+              break;
+          }
+          this.message = 'Login successful!';
+        } else {
+          this.message = 'Unexpected response from server.';
+        }
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Login Error:', error);
-        console.error('Error details:', error.error); // Log the error response body
-        this.message = error.error?.message || 'Login failed! Please check your credentials.';
+        this.message = error.error?.error || 'Login failed due to an unexpected error.';
       },
+    });
+  }
+
+  logout() {
+    this.loginService.logout().subscribe({
+      next: (response: { message: string }) => { // Type the response
+        this.isLoggedIn = false;
+        this.message = response.message || 'Logged out successfully';
+        this.email = '';
+        this.password = '';
+        this.router.navigate(['/login']);
+      },
+      error: (error: { error: { error: string } }) => { // Type the error
+        console.error('Logout Error:', error);
+        this.message = error.error?.error || 'Logout failed';
+      }
     });
   }
 }

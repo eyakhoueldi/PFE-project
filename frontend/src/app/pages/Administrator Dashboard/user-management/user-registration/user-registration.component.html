@@ -1,0 +1,100 @@
+<div class="flex min-h-screen bg-gradient-to-br from-gray-950 to-gray-900 font-sans text-gray-200">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col p-6 relative">
+        <!-- Back Button (Tiny, Top Left, Shifted Right) -->
+        <button
+            type="button"
+            (click)="goBack()"
+            class="absolute top-4 left-24 bg-gray-700 hover:bg-gray-600 text-white text-sm font-medium py-1 px-3 rounded-full transition-colors duration-300 shadow-md z-20"
+        >
+            ← Back
+        </button>
+
+        <div class="flex-1 flex items-center justify-center">
+            <div class="glass shadow-2xl rounded-2xl p-12 max-w-4xl w-full fade-in relative overflow-hidden">
+                <!-- Background Glow Effect -->
+                <div class="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-cyan-400/10 rounded-full blur-3xl animate-pulse"></div>
+                <div class="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-teal-400/10 rounded-full blur-3xl animate-pulse"></div>
+
+                <!-- Header -->
+                <div class="text-center mb-10">
+                    <h2 class="text-5xl font-extrabold tracking-tight neon-text">User Registration</h2>
+                    <p class="text-sm text-gray-400 mt-2">Create and manage user roles with a futuristic touch</p>
+                </div>
+
+                <!-- Form -->
+                <form #userForm="ngForm" (ngSubmit)="onSubmit()" class="space-y-8">
+                    <!-- Email Field -->
+                    <div class="input-group">
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            [(ngModel)]="email"
+                            required
+                            email
+                            placeholder="Enter email address"
+                            #emailInput="ngModel"
+                            class="w-full px-6 py-3 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-300 shadow-inner hover:shadow-teal-500/30 text-lg"
+                        >
+                        <label for="email" class="label">Email</label>
+                        <div class="text-red-400 text-sm mt-2" *ngIf="emailInput.invalid && emailInput.touched">Please enter a valid email.</div>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="input-group">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            [(ngModel)]="password"
+                            required
+                            minlength="6"
+                            placeholder="Enter password"
+                            #passwordInput="ngModel"
+                            class="w-full px-6 py-3 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-300 shadow-inner hover:shadow-teal-500/30 text-lg"
+                        >
+                        <label for="password" class="label">Password</label>
+                        <div class="text-red-400 text-sm mt-2" *ngIf="passwordInput.invalid && passwordInput.touched">Password must be at least 6 characters.</div>
+                    </div>
+
+                    <!-- Role Field -->
+                    <div class="input-group relative">
+                        <select
+                            id="role"
+                            name="role"
+                            [(ngModel)]="role"
+                            required
+                            class="w-full px-6 py-3 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-300 shadow-inner hover:shadow-teal-500/30 text-lg"
+                        >
+                            <option value="" disabled>Select a role</option>
+                            <option *ngFor="let roleOption of roleOptions" [value]="roleOption">{{ roleOption }}</option>
+                        </select>
+                        <label for="role" class="label">Role</label>
+                        <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                        <div class="text-red-400 text-sm mt-2" *ngIf="userForm.controls['role']?.invalid && userForm.controls['role']?.touched">Please select a role.</div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button
+                        type="submit"
+                        class="w-full bg-teal-400 hover:bg-teal-500 text-white font-semibold py-3 rounded-lg shadow-lg pulse-button focus:ring-4 focus:ring-cyan-400/50 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all duration-300 hover:scale-105 hover:shadow-teal-500/50"
+                        [disabled]="userForm.invalid"
+                    >
+                        Create User
+                    </button>
+                </form>
+
+                <!-- Message -->
+                <div class="mt-6 p-4 rounded-lg" [ngClass]="{'hidden': !message}">
+                    <p class="text-base" [ngClass]="{'text-teal-400': !isError, 'text-red-400': isError}">{{ message }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

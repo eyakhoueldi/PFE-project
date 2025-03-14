@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { SidebarComponent } from "./components/sidebar/sidebar.component";
-import { LoginComponent } from "./pages/login/login.component";
+import { Component, inject } from '@angular/core';
+import { RouterModule } from '@angular/router'; // Import RouterModule
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  standalone: true, // Ensure this is a standalone component
-  imports: [LoginComponent, SidebarComponent], // Add SidebarComponent here
+  standalone: true,
+  imports: [RouterModule, CommonModule], // Add RouterModule here
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'] // Ensure Tailwind is correctly loaded here
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'frontend';
