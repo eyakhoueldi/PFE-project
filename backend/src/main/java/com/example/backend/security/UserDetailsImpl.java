@@ -10,47 +10,54 @@ import java.util.Collections;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private final User user;
+    private final String email;
+    private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(User user) {
-        this.user = user;
+    public UserDetailsImpl(String email, String password, Collection<? extends GrantedAuthority> authorities) {
+        this.email = email;
+        this.password = password;
+        this.authorities = authorities;
     }
 
     public static UserDetailsImpl build(User user) {
-        return new UserDetailsImpl(user);
+        Collection<GrantedAuthority> authorities = Collections.singletonList(
+                new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+        return new UserDetailsImpl(user.getEmail(), user.getPassword(), authorities);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList(); // No roles
+        return authorities;
     }
+
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getEmail(); // Use email as the username
+        return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true; // Modify as needed
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true; // Modify as needed
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true; // Modify as needed
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return true; // Modify as needed
+        return true;
     }
 }
